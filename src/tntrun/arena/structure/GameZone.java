@@ -118,7 +118,7 @@ public class GameZone {
 		final Iterator<BlockState> bsit = blocks.iterator();
 		int ticks = 1;
 		for (;ticks <= (blocks.size() / MAX_BLOCKS_PER_TICK) + 1; ticks++) {
-			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, 
+			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,
 				new Runnable() {
 					@Override
 					public void run() {

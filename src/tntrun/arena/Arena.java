@@ -31,7 +31,7 @@ public class Arena {
 	public TNTRun plugin;
 
 	public Arena(String name, TNTRun plugin) {
-		this.arenaname = name;
+		arenaname = name;
 		this.plugin = plugin;
 		arenagh = new GameHandler(plugin, this);
 		arenaph = new PlayerHandler(plugin, this);

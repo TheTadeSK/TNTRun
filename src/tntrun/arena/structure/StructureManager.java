@@ -176,9 +176,9 @@ public class StructureManager {
 	}
 
 	public void setArenaPoints(Location loc1, Location loc2) {
-		this.world = loc1.getWorld().getName();
-		this.p1 = loc1.toVector();
-		this.p2 = loc2.toVector();
+		world = loc1.getWorld().getName();
+		p1 = loc1.toVector();
+		p2 = loc2.toVector();
 	}
 
 	public void setGameLevelDestroyDelay(int delay) {
@@ -202,15 +202,15 @@ public class StructureManager {
 	}
 
 	public void setMaxPlayers(int maxplayers) {
-		this.maxPlayers = maxplayers;
+		maxPlayers = maxplayers;
 	}
 
 	public void setMinPlayers(int minplayers) {
-		this.minPlayers = minplayers;
+		minPlayers = minplayers;
 	}
 
 	public void setVotePercent(double votepercent) {
-		this.votesPercent = votepercent;
+		votesPercent = votepercent;
 	}
 
 	public void setTimeLimit(int timelimit) {
@@ -234,7 +234,7 @@ public class StructureManager {
 	}
 
 	public void setRewards(int money) {
-		this.rewards.setRewards(money);
+		rewards.setRewards(money);
 	}
 
 	public void setTeleportDestination(TeleportDestination teleportDest) {

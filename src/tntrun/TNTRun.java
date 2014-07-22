@@ -63,10 +63,10 @@ public class TNTRun extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new PlayerLeaveArenaChecker(this), this);
 		getServer().getPluginManager().registerEvents(new SignHandler(this), this);
 		// load arenas
-		final File arenasfolder = new File(this.getDataFolder() + File.separator + "arenas");
+		final File arenasfolder = new File(getDataFolder() + File.separator + "arenas");
 		arenasfolder.mkdirs();
 		final TNTRun instance = this;
-		this.getServer().getScheduler().scheduleSyncDelayedTask(
+		getServer().getScheduler().scheduleSyncDelayedTask(
 			this,
 			new Runnable() {
 				@Override

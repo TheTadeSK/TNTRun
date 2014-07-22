@@ -53,7 +53,7 @@ public class GlobalLobby {
 	}
 
 	public void setLobbyLocation(Location location) {
-		this.lobbyLocation = new LobbyLocation(location.getWorld().getName(), location.toVector(), location.getYaw(), location.getPitch());
+		lobbyLocation = new LobbyLocation(location.getWorld().getName(), location.toVector(), location.getYaw(), location.getPitch());
 	}
 
 	public void saveToConfig() {

@@ -57,16 +57,16 @@ public class Rewards {
 	}
 
 	public void setRewards(ItemStack[] rewards) {
-		this.itemrewards.clear();
+		itemrewards.clear();
 		for (ItemStack reward : rewards) {
 			if (reward != null) {
-				this.itemrewards.add(reward);
+				itemrewards.add(reward);
 			}
 		}
 	}
 
 	public void setRewards(int money) {
-		this.moneyreward = money;
+		moneyreward = money;
 	}
 
 	public void rewardPlayer(Player player) {

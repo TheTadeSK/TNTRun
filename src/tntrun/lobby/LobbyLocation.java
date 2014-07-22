@@ -51,9 +51,9 @@ public class LobbyLocation {
 
 	public LobbyLocation(String worldname, Vector vector, float yaw, float pitch) {
 		this.worldname = worldname;
-		this.x = vector.getX();
-		this.y = vector.getY();
-		this.z = vector.getZ();
+		x = vector.getX();
+		y = vector.getY();
+		z = vector.getZ();
 		this.yaw = yaw;
 		this.pitch = pitch;
 	}

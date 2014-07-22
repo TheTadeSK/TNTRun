@@ -36,10 +36,10 @@ public class SignInfo {
 	}
 
 	public SignInfo(Block block) {
-		this.worldname = block.getWorld().getName();
-		this.x = block.getX();
-		this.y = block.getY();
-		this.z = block.getZ();
+		worldname = block.getWorld().getName();
+		x = block.getX();
+		y = block.getY();
+		z = block.getZ();
 	}
 
 	public Block getBlock() {
