@@ -47,23 +47,29 @@ public class GameZone {
 
 	private HashSet<Block> blockstodestroy = new HashSet<Block>();
 
+	private final int SCAN_DEPTH = 1;
 	public void destroyBlock(Location loc, final Arena arena) {
 		int y = loc.getBlockY();
-		if (loc.getBlock().getType() == Material.AIR) {
+		Block block = null;
+		for (int i = 0; i <= SCAN_DEPTH; i++) {
+			block = getBlockUnderPlayer(y, loc);
 			y--;
+			if (block != null) {
+				break;
+			}
 		}
-		final Block block = getBlockUnderPlayer(y, loc);
 		if (block != null) {
-			if (!blockstodestroy.contains(block)) {
-				blockstodestroy.add(block);
+			final Block fblock = block;
+			if (!blockstodestroy.contains(fblock)) {
+				blockstodestroy.add(fblock);
 				Bukkit.getScheduler().scheduleSyncDelayedTask(
 					arena.plugin,
 					new Runnable() {
 						@Override
 						public void run() {
 							if (arena.getStatusManager().isArenaRunning()) {
-								blockstodestroy.remove(block);
-								removeGLBlocks(block);
+								blockstodestroy.remove(fblock);
+								removeGLBlocks(fblock);
 							}
 						}
 					}, arena.getStructureManager().getGameLevelDestroyDelay()

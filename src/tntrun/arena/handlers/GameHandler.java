@@ -187,11 +187,8 @@ public class GameHandler {
 	public void handlePlayer(final Player player) {
 		Location plloc = player.getLocation();
 		Location plufloc = plloc.clone().add(0, -1, 0);
-		// check for game location
-		if (arena.getStructureManager().getGameZone().isSandLocation(plufloc)) {
-			// remove block under player feet
-			arena.getStructureManager().getGameZone().destroyBlock(plufloc, arena);
-		}
+		// remove block under player feet
+		arena.getStructureManager().getGameZone().destroyBlock(plufloc, arena);
 		// check for win
 		if (arena.getPlayersManager().getCount() == 1) {
 			// last player won
