@@ -22,6 +22,7 @@ public class DeleteSpectatorSpawn implements CommandHandlerInterface {
 				return true;
 			}
 			arena.getStructureManager().removeSpectatorsSpawn();
+			player.sendMessage("Spectator spawn deleted");
 		} else {
 			player.sendMessage("Arena does not exist");
 		}
