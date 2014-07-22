@@ -25,7 +25,6 @@ import org.bukkit.entity.Player;
 
 import tntrun.TNTRun;
 import tntrun.arena.Arena;
-import tntrun.arena.structure.GameLevel;
 import tntrun.arena.structure.Kits;
 import tntrun.bars.Bars;
 import tntrun.messages.Messages;
@@ -181,11 +180,9 @@ public class GameHandler {
 		Location plloc = player.getLocation();
 		Location plufloc = plloc.clone().add(0, -1, 0);
 		// check for game location
-		for (final GameLevel gl : arena.getStructureManager().getGameLevels()) {
+		if (arena.getStructureManager().getGameZone().isSandLocation(plufloc)) {
 			// remove block under player feet
-			if (gl.isSandLocation(plufloc)) {
-				gl.destroyBlock(plufloc, arena);
-			}
+			arena.getStructureManager().getGameZone().destroyBlock(plufloc, arena);
 		}
 		// check for win
 		if (arena.getPlayersManager().getCount() == 1) {
@@ -215,24 +212,9 @@ public class GameHandler {
 		arena.getStatusManager().setRegenerating(true);
 		// modify signs
 		plugin.signEditor.modifySigns(arena.getArenaName());
-		// schedule gamelevels regen
-		int delay = 1;
-		for (final GameLevel gl : arena.getStructureManager().getGameLevels()) {
-			Bukkit.getScheduler().scheduleSyncDelayedTask(
-				arena.plugin,
-				new Runnable() {
-					@Override
-					public void run() {
-						if (arena.getStatusManager().isArenaEnabled()) {
-							gl.regen();
-						}
-					}
-				},
-				delay
-			);
-			delay++;
-		}
-		// schedule arena regen finished
+		// schedule gamezone regen
+		int delay = arena.getStructureManager().getGameZone().regen(arena.plugin);
+		// regen finished
 		Bukkit.getScheduler().scheduleSyncDelayedTask(
 			arena.plugin,
 			new Runnable() {

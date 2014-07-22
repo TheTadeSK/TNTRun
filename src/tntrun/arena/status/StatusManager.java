@@ -20,7 +20,6 @@ package tntrun.arena.status;
 import org.bukkit.entity.Player;
 
 import tntrun.arena.Arena;
-import tntrun.arena.structure.GameLevel;
 import tntrun.messages.Messages;
 
 public class StatusManager {
@@ -65,10 +64,8 @@ public class StatusManager {
 		}
 		// stop antileave handler
 		arena.getGameHandler().stopArenaAntiLeaveHandler();
-		// regen gamelevels
-		for (GameLevel gl : arena.getStructureManager().getGameLevels()) {
-			gl.regen();
-		}
+		// regen gamezone
+		arena.getStructureManager().getGameZone().regenNow();
 		// modify signs
 		arena.plugin.signEditor.modifySigns(arena.getArenaName());
 	}

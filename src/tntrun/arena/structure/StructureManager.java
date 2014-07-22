@@ -18,12 +18,10 @@
 package tntrun.arena.structure;
 
 import java.io.IOException;
-import java.util.HashSet;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -61,10 +59,10 @@ public class StructureManager {
 		return p2;
 	}
 
-	private HashSet<GameLevel> gamelevels = new HashSet<GameLevel>();
+	private GameZone gamezone = new GameZone();
 
-	public HashSet<GameLevel> getGameLevels() {
-		return gamelevels;
+	public GameZone getGameZone() {
+		return gamezone;
 	}
 
 	private int gameleveldestroydelay = 8;
@@ -158,9 +156,6 @@ public class StructureManager {
 		if (getP1() == null || getP2() == null || world == null) {
 			return "Arena bounds not set";
 		}
-		if (gamelevels.size() == 0) {
-			return "Arena gamelevels not set";
-		}
 		if (!loselevel.isConfigured()) {
 			return "Arena looselevel not set";
 		}
@@ -174,37 +169,6 @@ public class StructureManager {
 		this.world = loc1.getWorld().getName();
 		this.p1 = loc1.toVector();
 		this.p2 = loc2.toVector();
-	}
-
-	public boolean setGameLevel(String glname, Location loc1, Location loc2) {
-		if (isInArenaBounds(loc1) && isInArenaBounds(loc2)) {
-			GameLevel gl = getGameLevelByName(glname);
-			if (gl == null) {
-				gl = new GameLevel(glname);
-				gamelevels.add(gl);
-			}
-			gl.setGameLocation(loc1, loc2);
-			return true;
-		}
-		return false;
-	}
-
-	public boolean removeGameLevel(String glname) {
-		GameLevel gl = getGameLevelByName(glname);
-		if (gl != null) {
-			gamelevels.remove(gl);
-			return true;
-		}
-		return false;
-	}
-
-	private GameLevel getGameLevelByName(String name) {
-		for (GameLevel gl : gamelevels) {
-			if (gl.getGameLevelName().equals(name)) {
-				return gl;
-			}
-		}
-		return null;
 	}
 
 	public void setGameLevelDestroyDelay(int delay) {
@@ -276,13 +240,6 @@ public class StructureManager {
 			config.set("p2", p2);
 		} catch (Exception e) {
 		}
-		// save gamelevels
-		for (GameLevel gl : gamelevels) {
-			try {
-				gl.saveToConfig(config);
-			} catch (Exception e) {
-			}
-		}
 		// save gamelevel destroy delay
 		config.set("gameleveldestroydelay", gameleveldestroydelay);
 		// save looselevel
@@ -325,15 +282,6 @@ public class StructureManager {
 		// load arena bounds
 		p1 = config.getVector("p1", null);
 		p2 = config.getVector("p2", null);
-		// load gamelevels
-		ConfigurationSection cs = config.getConfigurationSection("gamelevels");
-		if (cs != null) {
-			for (String glname : cs.getKeys(false)) {
-				GameLevel gl = new GameLevel(glname);
-				gl.loadFromConfig(config);
-				gamelevels.add(gl);
-			}
-		}
 		// load gamelevel destroy delay
 		gameleveldestroydelay = config.getInt("gameleveldestroydelay", gameleveldestroydelay);
 		// load looselevel
