@@ -23,8 +23,11 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import tntrun.TNTRun;
+import tntrun.arena.Arena;
+import tntrun.arena.structure.StructureManager.DamageEnabled;
 
 public class PlayerStatusHandler implements Listener {
 
@@ -34,13 +37,32 @@ public class PlayerStatusHandler implements Listener {
 		this.plugin = plugin;
 	}
 
-	// player should be invincible while in arena
+	// handle damage based on arena settings
+	// fall damage is always cancelled
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onPlayerDamage(EntityDamageEvent e) {
 		if (e.getEntity() instanceof Player) {
 			Player player = (Player) e.getEntity();
-			if (plugin.amanager.getPlayerArena(player.getName()) != null) {
-				e.setCancelled(true);
+			Arena arena = plugin.amanager.getPlayerArena(player.getName());
+			if (arena != null) {
+				if (e.getCause() == DamageCause.FALL) {
+					e.setCancelled(true);
+					return;
+				}
+				DamageEnabled status = arena.getStructureManager().getDamageEnabled();
+				switch (status) {
+					case YES: {
+						return;
+					}
+					case ZERO: {
+						e.setDamage(0);
+						return;
+					}
+					case NO: {
+						e.setCancelled(true);
+						return;
+					}
+				}
 			}
 		}
 	}

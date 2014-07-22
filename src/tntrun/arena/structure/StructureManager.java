@@ -141,6 +141,16 @@ public class StructureManager {
 		PREVIOUS, LOBBY;
 	}
 
+	private DamageEnabled damageEnabled = DamageEnabled.NO;
+
+	public DamageEnabled getDamageEnabled() {
+		return damageEnabled;
+	}
+
+	public static enum DamageEnabled {
+		YES, ZERO, NO
+	}
+
 	public boolean isInArenaBounds(Location loc) {
 		if (loc.toVector().isInAABB(getP1(), getP2())) {
 			return true;
