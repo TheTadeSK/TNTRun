@@ -221,7 +221,7 @@ public class StructureManager {
 		return false;
 	}
 
-	public void removeSpectatorsSpawn(Location loc) {
+	public void removeSpectatorsSpawn() {
 		spectatorspawn = null;
 	}
 
