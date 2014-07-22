@@ -127,6 +127,10 @@ public class PlayerHandler {
 		// allow flight
 		player.setAllowFlight(true);
 		player.setFlying(true);
+		// hide from others
+		for (Player oplayer : Bukkit.getOnlinePlayers()) {
+			oplayer.hidePlayer(player);
+		}
 		// send message to player
 		Messages.sendMessage(player, msgtoplayer);
 		// modify signs
@@ -143,6 +147,9 @@ public class PlayerHandler {
 		// reset spectators
 		if (arena.getPlayersManager().isSpectator(player.getName())) {
 			arena.getPlayersManager().removeSpecator(player.getName());
+			for (Player oplayer : Bukkit.getOnlinePlayers()) {
+				oplayer.showPlayer(player);
+			}
 			player.setAllowFlight(false);
 			player.setFlying(false);
 		}
