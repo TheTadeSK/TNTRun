@@ -42,7 +42,7 @@ public class SetArena implements CommandHandlerInterface {
 				player.sendMessage("Disable arena first");
 				return true;
 			}
-			PlayerCuboidSelection sel = selection.getPlayerSelection(player, false);
+			PlayerCuboidSelection sel = selection.getPlayerSelection(player);
 			if (sel != null) {
 				arena.getStructureManager().setArenaPoints(sel.getMinimumLocation(), sel.getMaximumLocation());
 				player.sendMessage("Arena bounds set");

@@ -49,11 +49,7 @@ public class SetLoseLevel implements CommandHandlerInterface {
 			player.sendMessage("Set arena bounds first");
 			return true;
 		}
-		PlayerCuboidSelection sel = selection.getPlayerSelection(player, true);
-		if (sel == null) {
-			player.sendMessage("Locations are wrong or not defined");
-			return true;
-		}
+		PlayerCuboidSelection sel = selection.getPlayerSelection(player);
 		if (arena.getStructureManager().setLooseLevel(sel.getMinimumLocation(), sel.getMaximumLocation())) {
 			player.sendMessage("LoseLevel set");
 		} else {

@@ -32,15 +32,15 @@ public class PlayerSelection {
 		}
 	}
 
-	public PlayerCuboidSelection getPlayerSelection(Player player, boolean oneBlockHigh) {
+	public PlayerCuboidSelection getPlayerSelection(Player player) {
 		// try to get own locations
-		Location[] locs = ownlocations.getLocations(player, oneBlockHigh);
+		Location[] locs = ownlocations.getLocations(player);
 		if (locs != null) {
 			return new PlayerCuboidSelection(locs[0], locs[1]);
 		}
 		// now check worldedit selection
 		if (weintegration != null) {
-			locs = weintegration.getLocations(player, oneBlockHigh);
+			locs = weintegration.getLocations(player);
 			if (locs != null) {
 				return new PlayerCuboidSelection(locs[0], locs[1]);
 			}

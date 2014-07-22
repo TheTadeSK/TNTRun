@@ -28,13 +28,9 @@ public class WEIntegration {
 
 	private WorldEditPlugin we = (WorldEditPlugin) Bukkit.getPluginManager().getPlugin("WorldEdit");
 
-	protected Location[] getLocations(Player player, boolean oneBlockHigh) {
+	protected Location[] getLocations(Player player) {
 		try {
-			Location[] locs = getPlayerSelection(player);
-			if (oneBlockHigh && !isOneBlockHigh(locs)) {
-				return null;
-			}
-			return locs;
+			return getPlayerSelection(player);
 		} catch (Exception e) {
 		}
 		return null;
@@ -46,15 +42,6 @@ public class WEIntegration {
 		locs[0] = psel.getMinimumPoint();
 		locs[1] = psel.getMaximumPoint();
 		return locs;
-	}
-
-	private boolean isOneBlockHigh(Location[] locs) {
-		int y1 = locs[0].getBlockY();
-		int y2 = locs[1].getBlockY();
-		if (y1 == y2) {
-			return true;
-		}
-		return false;
 	}
 
 }

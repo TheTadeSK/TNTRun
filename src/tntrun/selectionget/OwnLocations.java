@@ -43,13 +43,9 @@ public class OwnLocations {
 		loc2.remove(playername);
 	}
 
-	protected Location[] getLocations(Player player, boolean oneBlockHigh) {
+	protected Location[] getLocations(Player player) {
 		try {
-			Location[] locs = sortLoc(player);
-			if (oneBlockHigh && !isOneBlockHigh(locs)) {
-				return null;
-			}
-			return locs;
+			return sortLoc(player);
 		} catch (Exception e) {
 		}
 		return null;
@@ -84,15 +80,6 @@ public class OwnLocations {
 		locs[1] = new Location(loc1.get(player.getName()).getWorld(), xmax, ymax, zmax);
 		locs[0].distanceSquared(locs[1]);
 		return locs;
-	}
-
-	private boolean isOneBlockHigh(Location[] locs) {
-		int y1 = locs[0].getBlockY();
-		int y2 = locs[1].getBlockY();
-		if (y1 == y2) {
-			return true;
-		}
-		return false;
 	}
 
 }
