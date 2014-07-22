@@ -54,6 +54,11 @@ public class GameHandler {
 							arena.getPlayerHandler().leavePlayer(player, Messages.playerlefttoplayer, Messages.playerlefttoothers);
 						}
 					}
+					for (Player player : arena.getPlayersManager().getSpectatorsCopy()) {
+						if (!arena.getStructureManager().isInArenaBounds(player.getLocation())) {
+							arena.getPlayerHandler().leavePlayer(player, "", "");
+						}
+					}
 				}
 			},
 			0, 1
