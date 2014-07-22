@@ -143,13 +143,16 @@ public class PlayerHandler {
 
 	// remove player from arena
 	public void leavePlayer(Player player, String msgtoplayer, String msgtoarenaplayers) {
-		// remove player from arena and restore his state
-		removePlayerFromArenaAndRestoreState(player, false);
 		// reset spectators
 		if (arena.getPlayersManager().isSpectator(player.getName())) {
 			arena.getPlayersManager().removeSpecator(player.getName());
 			player.setAllowFlight(false);
 			player.setFlying(false);
+		}
+		// remove player from arena and restore his state
+		removePlayerFromArenaAndRestoreState(player, false);
+		// should not send messages and other things when player is a spectator
+		if (arena.getPlayersManager().isSpectator(player.getName())) {
 			return;
 		}
 		// send message to player
