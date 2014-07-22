@@ -241,6 +241,10 @@ public class StructureManager {
 		this.teleportDest = teleportDest;
 	}
 
+	public void setDamageEnabled(DamageEnabled damageEnabled) {
+		this.damageEnabled = damageEnabled;
+	}
+
 	public void saveToConfig() {
 		FileConfiguration config = new YamlConfiguration();
 		// save arena bounds
@@ -274,6 +278,8 @@ public class StructureManager {
 		config.set("countdown", countdown);
 		// save teleport destination
 		config.set("teleportto", teleportDest.toString());
+		// save damage enabled
+		config.set("damageenabled", damageEnabled.toString());
 		// save kits
 		kits.saveToConfig(config);
 		// save rewards
@@ -309,7 +315,9 @@ public class StructureManager {
 		// load countdown
 		countdown = config.getInt("countdown", countdown);
 		// load teleport destination
-		teleportDest = TeleportDestination.valueOf(config.getString("teleportto", "PREVIOUS"));
+		teleportDest = TeleportDestination.valueOf(config.getString("teleportto", TeleportDestination.PREVIOUS.toString()));
+		// load damage enabled
+		damageEnabled = DamageEnabled.valueOf(config.getString("damageenabled", DamageEnabled.NO.toString()));
 		// load kits
 		kits.loadFromConfig(config);
 		// load rewards
