@@ -69,4 +69,18 @@ public class SignInfo {
 		return z;
 	}
 
+	@Override
+	public int hashCode() {
+		return worldname.hashCode() ^ x ^ y ^ z;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof SignInfo)) {
+			return super.equals(obj);
+		}
+		SignInfo si = (SignInfo) obj;
+		return (worldname.equals(si.worldname) && x == si.x && y == si.y && z == si.z);
+	}
+
 }
