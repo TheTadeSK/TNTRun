@@ -50,4 +50,9 @@ public class DeleteArena implements CommandHandlerInterface {
 		return true;
 	}
 
+	@Override
+	public int getMinArgsLength() {
+		return 1;
+	}
+
 }

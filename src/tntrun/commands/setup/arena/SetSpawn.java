@@ -49,4 +49,9 @@ public class SetSpawn implements CommandHandlerInterface {
 		return true;
 	}
 
+	@Override
+	public int getMinArgsLength() {
+		return 1;
+	}
+
 }

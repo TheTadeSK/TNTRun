@@ -58,4 +58,9 @@ public class SetLoseLevel implements CommandHandlerInterface {
 		return true;
 	}
 
+	@Override
+	public int getMinArgsLength() {
+		return 1;
+	}
+
 }

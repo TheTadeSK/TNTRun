@@ -46,4 +46,9 @@ public class SetVotePercent implements CommandHandlerInterface {
 		return true;
 	}
 
+	@Override
+	public int getMinArgsLength() {
+		return 2;
+	}
+
 }

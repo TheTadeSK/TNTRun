@@ -20,6 +20,7 @@ package tntrun.commands.setup;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -102,9 +103,15 @@ public class SetupCommandsHandler implements CommandExecutor {
 			Messages.sendMessage(player, Messages.nopermission);
 			return true;
 		}
-		//execute command
+		// get command
 		if (args.length > 0 && commandHandlers.containsKey(args[0])) {
 			CommandHandlerInterface commandh = commandHandlers.get(args[0]);
+			//check args length
+			if (args.length - 1 < commandh.getMinArgsLength()) {
+				Messages.sendMessage(player, ChatColor.RED+"Not enough args");
+				return false;
+			}
+			//execute command
 			boolean result = commandh.handleCommand(player, Arrays.copyOfRange(args, 1, args.length));
 			return result;
 		}
