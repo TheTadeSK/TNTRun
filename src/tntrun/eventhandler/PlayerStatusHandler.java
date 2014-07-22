@@ -21,6 +21,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
@@ -62,6 +63,21 @@ public class PlayerStatusHandler implements Listener {
 						e.setCancelled(true);
 						return;
 					}
+				}
+			}
+		}
+	}
+
+	// cancel all to damage to and from spectators
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	public void onDamageByPlayer(EntityDamageByEntityEvent e) {
+		if (e.getEntity() instanceof Player && e.getDamager() instanceof Player) {
+			Player player = (Player) e.getEntity();
+			Player damager = (Player) e.getDamager();
+			Arena arena = plugin.amanager.getPlayerArena(player.getName());
+			if (arena != null) {
+				if (arena.getPlayersManager().isSpectator(player.getName()) || arena.getPlayersManager().isSpectator(damager.getName())) {
+					e.setCancelled(true);
 				}
 			}
 		}

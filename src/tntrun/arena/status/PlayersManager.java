@@ -27,9 +27,10 @@ import org.bukkit.entity.Player;
 public class PlayersManager {
 
 	private HashMap<String, Player> players = new HashMap<String, Player>();
+	private HashMap<String, Player> spectators = new HashMap<String, Player>();
 
 	public boolean isInArena(String name) {
-		return players.containsKey(name);
+		return players.containsKey(name) || spectators.containsKey(name);
 	}
 
 	public int getCount() {
@@ -50,6 +51,22 @@ public class PlayersManager {
 
 	public void remove(Player player) {
 		players.remove(player.getName());
+	}
+
+	public boolean isSpectator(String name) {
+		return spectators.containsKey(name);
+	}
+
+	public void moveToSpectators(String name) {
+		spectators.put(name, players.remove(name));
+	}
+
+	public void removeSpecator(String name) {
+		spectators.remove(name);
+	}
+
+	public HashSet<Player> getSpectatorsCopy() {
+		return new HashSet<Player>(spectators.values());
 	}
 
 }

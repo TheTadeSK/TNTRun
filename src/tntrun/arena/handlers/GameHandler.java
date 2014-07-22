@@ -167,6 +167,9 @@ public class GameHandler {
 	}
 
 	public void stopArena() {
+		for (Player player : arena.getPlayersManager().getSpectatorsCopy()) {
+			arena.getPlayerHandler().leavePlayer(player, "", "");
+		}
 		arena.getStatusManager().setRunning(false);
 		Bukkit.getScheduler().cancelTask(arenahandler);
 		plugin.signEditor.modifySigns(arena.getArenaName());
@@ -194,8 +197,12 @@ public class GameHandler {
 		}
 		// check for lose
 		if (arena.getStructureManager().getLoseLevel().isLooseLocation(plloc)) {
-			// player lost
-			arena.getPlayerHandler().leavePlayer(player, Messages.playerlosttoplayer, Messages.playerlosttoothers);
+			// if we have the spectate spawn than we will move player to spectators, otherwise we will remove him from arena
+			if (arena.getStructureManager().getSpectatorSpawn() != null) {
+				arena.getPlayerHandler().spectatePlayer(player, Messages.playerlosttoplayer, Messages.playerlosttoothers);
+			} else {
+				arena.getPlayerHandler().leavePlayer(player, Messages.playerlosttoplayer, Messages.playerlosttoothers);
+			}
 			return;
 		}
 	}

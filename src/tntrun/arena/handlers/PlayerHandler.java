@@ -21,6 +21,7 @@ import java.util.HashSet;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import tntrun.TNTRun;
 import tntrun.arena.Arena;
@@ -114,10 +115,43 @@ public class PlayerHandler {
 		}
 	}
 
+	// move to spectators
+	public void spectatePlayer(Player player, String msgtoplayer, String msgtoarenaplayers) {
+		// move to spectators
+		arena.getPlayersManager().moveToSpectators(player.getName());
+		// teleport to spectators spawn
+		player.teleport(arena.getStructureManager().getSpectatorSpawn());
+		// clear inventory
+		player.getInventory().clear();
+		player.getInventory().setArmorContents(new ItemStack[4]);
+		// allow flight
+		player.setAllowFlight(true);
+		player.setFlying(true);
+		// send message to player
+		Messages.sendMessage(player, msgtoplayer);
+		// modify signs
+		plugin.signEditor.modifySigns(arena.getArenaName());
+		// send message to other players and update bars
+		for (Player oplayer : arena.getPlayersManager().getPlayers()) {
+			msgtoarenaplayers = msgtoarenaplayers.replace("{PLAYER}", player.getName());
+			Messages.sendMessage(oplayer, msgtoarenaplayers);
+			if (!arena.getStatusManager().isArenaStarting() && !arena.getStatusManager().isArenaRunning()) {
+				Bars.setBar(oplayer, Bars.waiting, arena.getPlayersManager().getCount(), 0, arena.getPlayersManager().getCount() * 100 / arena.getStructureManager().getMinPlayers());
+			}
+		}
+	}
+
 	// remove player from arena
 	public void leavePlayer(Player player, String msgtoplayer, String msgtoarenaplayers) {
 		// remove player from arena and restore his state
 		removePlayerFromArenaAndRestoreState(player, false);
+		// reset spectators
+		if (arena.getPlayersManager().isSpectator(player.getName())) {
+			arena.getPlayersManager().removeSpecator(player.getName());
+			player.setAllowFlight(false);
+			player.setFlying(false);
+			return;
+		}
 		// send message to player
 		Messages.sendMessage(player, msgtoplayer);
 		// modify signs

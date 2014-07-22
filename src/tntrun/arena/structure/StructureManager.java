@@ -77,6 +77,19 @@ public class StructureManager {
 		return loselevel;
 	}
 
+	private Vector spectatorspawn = null;
+
+	public Vector getSpectatorSpawnVector() {
+		return spectatorspawn;
+	}
+
+	public Location getSpectatorSpawn() {
+		if (spectatorspawn != null) {
+			return new Location(getWorld(), spectatorspawn.getX(), spectatorspawn.getY(), spectatorspawn.getZ());
+		}
+		return null;
+	}
+
 	private Vector spawnpoint = null;
 
 	public Vector getSpawnPointVector() {
@@ -84,8 +97,7 @@ public class StructureManager {
 	}
 
 	public Location getSpawnPoint() {
-		Location spawn = new Location(getWorld(), spawnpoint.getX(), spawnpoint.getY(), spawnpoint.getZ());
-		return spawn;
+		return new Location(getWorld(), spawnpoint.getX(), spawnpoint.getY(), spawnpoint.getZ());
 	}
 
 	private int maxPlayers = 6;
@@ -201,6 +213,18 @@ public class StructureManager {
 		return false;
 	}
 
+	public boolean setSpectatorsSpawn(Location loc) {
+		if (isInArenaBounds(loc)) {
+			spectatorspawn = loc.toVector();
+			return true;
+		}
+		return false;
+	}
+
+	public void removeSpectatorsSpawn(Location loc) {
+		spectatorspawn = null;
+	}
+
 	public void setMaxPlayers(int maxplayers) {
 		maxPlayers = maxplayers;
 	}
@@ -266,6 +290,11 @@ public class StructureManager {
 			config.set("spawnpoint", spawnpoint);
 		} catch (Exception e) {
 		}
+		// save spectators spawn
+		try {
+			config.set("spectatorspawn", spectatorspawn);
+		} catch (Exception e) {
+		}
 		// save maxplayers
 		config.set("maxPlayers", maxPlayers);
 		// save minplayers
@@ -304,6 +333,8 @@ public class StructureManager {
 		loselevel.loadFromConfig(config);
 		// load spawnpoint
 		spawnpoint = config.getVector("spawnpoint", null);
+		// load spectators spawn
+		spectatorspawn = config.getVector("spectatorspawn", null);
 		// load maxplayers
 		maxPlayers = config.getInt("maxPlayers", maxPlayers);
 		// load minplayers
