@@ -38,7 +38,7 @@ public class SetTimeLimit implements CommandHandlerInterface {
 				player.sendMessage("Disable arena first");
 				return true;
 			}
-			arena.getStructureManager().setTimeLimit(Integer.valueOf(args[1]));
+			arena.getStructureManager().setTimeLimit(Integer.parseInt(args[1]));
 			player.sendMessage("Time limit set");
 		} else {
 			player.sendMessage("Arena does not exist");

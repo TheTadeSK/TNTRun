@@ -38,7 +38,7 @@ public class SetMaxPlayers implements CommandHandlerInterface {
 				player.sendMessage("Disable arena first");
 				return true;
 			}
-			arena.getStructureManager().setMaxPlayers(Integer.valueOf(args[1]));
+			arena.getStructureManager().setMaxPlayers(Integer.parseInt(args[1]));
 			player.sendMessage("Max Players set");
 		} else {
 			player.sendMessage("Arena does not exist");

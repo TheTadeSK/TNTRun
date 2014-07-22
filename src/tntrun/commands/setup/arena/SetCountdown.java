@@ -38,7 +38,7 @@ public class SetCountdown implements CommandHandlerInterface {
 				player.sendMessage("Disable arena first");
 				return true;
 			}
-			arena.getStructureManager().setCountdown(Integer.valueOf(args[1]));
+			arena.getStructureManager().setCountdown(Integer.parseInt(args[1]));
 		} else {
 			player.sendMessage("Arena does not exist");
 		}

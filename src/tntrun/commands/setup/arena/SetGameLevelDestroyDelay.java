@@ -38,7 +38,7 @@ public class SetGameLevelDestroyDelay implements CommandHandlerInterface {
 				player.sendMessage("Disable arena first");
 				return true;
 			}
-			arena.getStructureManager().setGameLevelDestroyDelay(Integer.valueOf(args[1]));
+			arena.getStructureManager().setGameLevelDestroyDelay(Integer.parseInt(args[1]));
 			player.sendMessage("GameLevel blocks destroy delay set");
 		} else {
 			player.sendMessage("Arena does not exist");
