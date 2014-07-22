@@ -36,6 +36,7 @@ import tntrun.commands.setup.arena.EnableArena;
 import tntrun.commands.setup.arena.FinishArena;
 import tntrun.commands.setup.arena.SetArena;
 import tntrun.commands.setup.arena.SetCountdown;
+import tntrun.commands.setup.arena.SetDamage;
 import tntrun.commands.setup.arena.SetGameLevelDestroyDelay;
 import tntrun.commands.setup.arena.SetItemsRewards;
 import tntrun.commands.setup.arena.SetLoseLevel;
@@ -86,6 +87,7 @@ public class SetupCommandsHandler implements CommandExecutor {
 		commandHandlers.put("deleteKit", new DeleteKit(plugin));
 		commandHandlers.put("settimelimit", new SetTimeLimit(plugin));
 		commandHandlers.put("setteleport", new SetTeleport(plugin));
+		commandHandlers.put("setdamage", new SetDamage(plugin));
 		commandHandlers.put("finish", new FinishArena(plugin));
 		commandHandlers.put("disable", new DisableArena(plugin));
 		commandHandlers.put("enable", new EnableArena(plugin));
