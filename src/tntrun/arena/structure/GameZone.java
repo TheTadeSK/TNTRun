@@ -35,16 +35,6 @@ import tntrun.arena.Arena;
 
 public class GameZone {
 
-	public boolean isSandLocation(Location loc) {
-		if (loc.getBlock().getType() != Material.AIR) {
-			return true;
-		}
-		if (loc.getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
-			return true;
-		}
-		return false;
-	}
-
 	private HashSet<Block> blockstodestroy = new HashSet<Block>();
 
 	private final int SCAN_DEPTH = 1;
