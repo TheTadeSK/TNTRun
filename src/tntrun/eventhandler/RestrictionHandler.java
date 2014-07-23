@@ -27,6 +27,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 
 import tntrun.TNTRun;
 import tntrun.arena.Arena;
@@ -40,11 +41,10 @@ public class RestrictionHandler implements Listener {
 	}
 
 	private HashSet<String> allowedcommands = new HashSet<String>(
-			Arrays.asList("/tntrun leave", "/tntrun vote", "/tr leave",
-					"/tr vote"));
+		Arrays.asList("/tntrun leave", "/tntrun vote", "/tr leave", "/tr vote")
+	);
 
-	// player should not be able to issue any commands besides /tr leave and /tr
-	// vote while in arena
+	// player should not be able to issue any commands besides /tr leave and /tr vote while in arena
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onPlayerCommand(PlayerCommandPreprocessEvent e) {
 		Player player = e.getPlayer();
@@ -75,9 +75,21 @@ public class RestrictionHandler implements Listener {
 		e.setCancelled(true);
 	}
 
-	// player should not be able to place block while in arena
+	// player should not be able to place blocks while in arena
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-	public void onPlayerBlockPlayer(BlockPlaceEvent e) {
+	public void onPlayerBlockPlace(BlockPlaceEvent e) {
+		Player player = e.getPlayer();
+		Arena arena = plugin.amanager.getPlayerArena(player.getName());
+		// ignore if player is not in arena
+		if (arena == null) {
+			return;
+		}
+		e.setCancelled(true);
+	}
+
+	//player is not able to drop items while in arena
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	public void onPlayerItemDrop(PlayerDropItemEvent e) {
 		Player player = e.getPlayer();
 		Arena arena = plugin.amanager.getPlayerArena(player.getName());
 		// ignore if player is not in arena
