@@ -48,7 +48,9 @@ public class SignInfo {
 		}
 		World world = Bukkit.getWorld(worldname);
 		if (world != null) {
-			return world.getBlockAt(x, y, z);
+			if (world.isChunkLoaded(x >> 4, z >> 4)) {
+				return world.getBlockAt(x, y, z);
+			}
 		}
 		return null;
 	}
