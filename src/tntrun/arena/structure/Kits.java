@@ -17,6 +17,7 @@
 
 package tntrun.arena.structure;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -82,15 +83,15 @@ public class Kits {
 		}
 
 		public void loadFromConfig(FileConfiguration config, String path) {
-			armor = (ItemStack[]) config.get(path+".armor");
-			items = (ItemStack[]) config.get(path+".items");
-			effects = Arrays.asList((PotionEffect[]) config.get(path+".effects"));
+			armor = config.getList(path+".armor").toArray(new ItemStack[1]);
+			items = config.getList(path+".items").toArray(new ItemStack[1]);
+			effects = Arrays.asList(config.getList(path+".effects").toArray(new PotionEffect[1]));
 		}
 
 		public void saveToConfig(FileConfiguration config, String path) {
-			config.set(path+".armor", armor);
-			config.set(path+".items", items);
-			config.set(path+".effects", effects.toArray(new PotionEffect[effects.size()]));
+			config.set(path+".armor", Arrays.asList(armor));
+			config.set(path+".items", Arrays.asList(items));
+			config.set(path+".effects", new ArrayList<PotionEffect>(effects));
 		}
 
 	}
