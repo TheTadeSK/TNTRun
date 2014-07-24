@@ -200,7 +200,7 @@ public class GameHandler {
 		// check for lose
 		if (arena.getStructureManager().getLoseLevel().isLooseLocation(plloc)) {
 			// if we have the spectate spawn than we will move player to spectators, otherwise we will remove him from arena
-			if (arena.getStructureManager().getSpectatorSpawn() != null) {
+			if (arena.getStructureManager().getSpawnPointVector() != null) {
 				arena.getPlayerHandler().spectatePlayer(player, Messages.playerlosttoplayer, Messages.playerlosttoothers);
 			} else {
 				arena.getPlayerHandler().leavePlayer(player, Messages.playerlosttoplayer, Messages.playerlosttoothers);
