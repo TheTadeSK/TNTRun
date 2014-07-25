@@ -35,8 +35,11 @@ public class Messages {
 	public static String teleporttolobby = "&6Teleported to lobby";
 
 	public static String availablearenas = "&6Available arenas:&r ";
+	public static String arenawolrdna = "&6Arena world is not loaded";
 	public static String arenadisabled = "&6Arena is disabled";
 	public static String arenarunning = "&6Arena already running";
+	public static String arenaregenerating = "&6Arena is regenerating";
+	public static String arenavehicle = "&6You can't join the game while sitting inside vehicle";
 	public static String arenadisabling = "&6Arena is disabling";
 
 	public static String playerscountinarena = "&6Current number of players in arena: {COUNT}";
@@ -74,8 +77,11 @@ public class Messages {
 		nopermission = config.getString("nopermission", nopermission);
 		teleporttolobby = config.getString("teleporttolobby", teleporttolobby);
 		availablearenas = config.getString("availablearenas", availablearenas);
+		arenawolrdna = config.getString("arenawolrdna", arenawolrdna);
 		arenadisabled = config.getString("arenadisabled", arenadisabled);
 		arenarunning = config.getString("arenarunning", arenarunning);
+		arenaregenerating = config.getString("arenaregenerating", arenaregenerating);
+		arenavehicle = config.getString("arenavehicle", arenavehicle);
 		arenadisabling = config.getString("arenadisabling", arenadisabling);
 		playerscountinarena = config.getString("playerscountinarena", playerscountinarena);
 		limitreached = config.getString("limitreached", limitreached);
@@ -101,8 +107,11 @@ public class Messages {
 		config.set("nopermission", nopermission);
 		config.set("teleporttolobby", teleporttolobby);
 		config.set("availablearenas", availablearenas);
+		config.set("arenawolrdna", arenawolrdna);
 		config.set("arenadisabled", arenadisabled);
 		config.set("arenarunning", arenarunning);
+		config.set("arenaregenerating", arenaregenerating);
+		config.set("arenavehicle", arenavehicle);
 		config.set("arenadisabling", arenadisabling);
 		config.set("playerscountinarena", playerscountinarena);
 		config.set("limitreached", limitreached);

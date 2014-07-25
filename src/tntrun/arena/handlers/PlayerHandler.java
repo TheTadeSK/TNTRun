@@ -42,7 +42,7 @@ public class PlayerHandler {
 	// check if player can join the arena
 	public boolean checkJoin(Player player) {
 		if (arena.getStructureManager().getWorld() == null) {
-			player.sendMessage("Arena world is unloaded, can't join arena");
+			Messages.sendMessage(player, Messages.arenawolrdna);
 			return false;
 		}
 		if (!arena.getStatusManager().isArenaEnabled()) {
@@ -54,11 +54,11 @@ public class PlayerHandler {
 			return false;
 		}
 		if (arena.getStatusManager().isArenaRegenerating()) {
-			Messages.sendMessage(player, Messages.arenarunning);
+			Messages.sendMessage(player, Messages.arenaregenerating);
 			return false;
 		}
 		if (player.isInsideVehicle()) {
-			player.sendMessage("You can't join the game while sitting inside vehicle");
+			Messages.sendMessage(player, Messages.arenavehicle);
 			return false;
 		}
 		if (arena.getPlayersManager().getCount() == arena.getStructureManager().getMaxPlayers()) {
