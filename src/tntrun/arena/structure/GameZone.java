@@ -109,7 +109,7 @@ public class GameZone {
 		}
 	}
 
-	private final int MAX_BLOCKS_PER_TICK = 100;
+	private final int MAX_BLOCKS_PER_TICK = 50;
 	public int regen(TNTRun plugin) {
 		final Iterator<BlockState> bsit = blocks.iterator();
 		int ticks = 1;
