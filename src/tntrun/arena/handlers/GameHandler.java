@@ -172,6 +172,9 @@ public class GameHandler {
 	}
 
 	public void stopArena() {
+		for (Player player : arena.getPlayersManager().getPlayersCopy()) {
+			arena.getPlayerHandler().leavePlayer(player, "", "");
+		}
 		for (Player player : arena.getPlayersManager().getSpectatorsCopy()) {
 			arena.getPlayerHandler().leavePlayer(player, "", "");
 		}
