@@ -163,6 +163,10 @@ public class GameHandler {
 						// handle player
 						handlePlayer(player);
 					}
+					// update bars for spectators too
+					for (Player player : arena.getPlayersManager().getSpectators()) {
+						Bars.setBar(player, Bars.playing, arena.getPlayersManager().getCount(), timelimit / 20, timelimit * 5 / arena.getStructureManager().getTimeLimit());
+					}
 					// decrease timelimit
 					timelimit--;
 				}

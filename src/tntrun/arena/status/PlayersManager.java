@@ -65,6 +65,10 @@ public class PlayersManager {
 		spectators.remove(name);
 	}
 
+	public Collection<Player> getSpectators() {
+		return Collections.unmodifiableCollection(spectators.values());
+	}
+
 	public HashSet<Player> getSpectatorsCopy() {
 		return new HashSet<Player>(spectators.values());
 	}
