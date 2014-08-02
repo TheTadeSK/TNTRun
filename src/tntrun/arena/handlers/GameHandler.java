@@ -141,19 +141,17 @@ public class GameHandler {
 			new Runnable() {
 				@Override
 				public void run() {
-					if (timelimit < 0) {
-						for (Player player : arena.getPlayersManager().getPlayersCopy()) {
-							// kick player
-							arena.getPlayerHandler().leavePlayer(player,Messages.arenatimeout, "");
-						}
+					// stop arena if player count is 0
+					if (arena.getPlayersManager().getCount() == 0) {
 						// stop arena
 						stopArena();
 						return;
 					}
-					// stop arena if player count is 0 (just in case)
-					if (arena.getPlayersManager().getCount() == 0) {
-						// stop arena
-						stopArena();
+					// kick all players if time is out
+					if (timelimit < 0) {
+						for (Player player : arena.getPlayersManager().getPlayersCopy()) {
+							arena.getPlayerHandler().leavePlayer(player,Messages.arenatimeout, "");
+						}
 						return;
 					}
 					// handle players
@@ -201,7 +199,6 @@ public class GameHandler {
 			// last player won
 			arena.getPlayerHandler().leaveWinner(player, Messages.playerwontoplayer);
 			broadcastWin(player);
-			stopArena();
 			return;
 		}
 		// check for lose
