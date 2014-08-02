@@ -37,6 +37,13 @@ public class PlayersManager {
 		return players.size();
 	}
 
+	public HashSet<Player> getAllParticipantsCopy() {
+		HashSet<Player> p = new HashSet<Player>();
+		p.addAll(players.values());
+		p.addAll(spectators.values());
+		return p;
+	}
+
 	public Collection<Player> getPlayers() {
 		return Collections.unmodifiableCollection(players.values());
 	}
@@ -57,8 +64,8 @@ public class PlayersManager {
 		return spectators.containsKey(name);
 	}
 
-	public void moveToSpectators(String name) {
-		spectators.put(name, players.remove(name));
+	public void addSpectator(Player player) {
+		spectators.put(player.getName(), player);
 	}
 
 	public void removeSpecator(String name) {

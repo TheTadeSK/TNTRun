@@ -174,10 +174,7 @@ public class GameHandler {
 	}
 
 	public void stopArena() {
-		for (Player player : arena.getPlayersManager().getPlayersCopy()) {
-			arena.getPlayerHandler().leavePlayer(player, "", "");
-		}
-		for (Player player : arena.getPlayersManager().getSpectatorsCopy()) {
+		for (Player player : arena.getPlayersManager().getAllParticipantsCopy()) {
 			arena.getPlayerHandler().leavePlayer(player, "", "");
 		}
 		arena.getStatusManager().setRunning(false);

@@ -117,8 +117,8 @@ public class PlayerHandler {
 
 	// move to spectators
 	public void spectatePlayer(Player player, String msgtoplayer, String msgtoarenaplayers) {
-		// move to spectators
-		arena.getPlayersManager().moveToSpectators(player.getName());
+		// remove form players
+		arena.getPlayersManager().remove(player);
 		// teleport to spectators spawn
 		player.teleport(arena.getStructureManager().getSpectatorSpawn());
 		// clear inventory
@@ -136,16 +136,19 @@ public class PlayerHandler {
 		// modify signs
 		plugin.signEditor.modifySigns(arena.getArenaName());
 		// send message to other players and update bars
-		for (Player oplayer : arena.getPlayersManager().getPlayers()) {
+		for (Player oplayer : arena.getPlayersManager().getAllParticipantsCopy()) {
 			msgtoarenaplayers = msgtoarenaplayers.replace("{PLAYER}", player.getName());
 			Messages.sendMessage(oplayer, msgtoarenaplayers);
 		}
+		//add to spectators
+		arena.getPlayersManager().add(player);
 	}
 
 	// remove player from arena
 	public void leavePlayer(Player player, String msgtoplayer, String msgtoarenaplayers) {
 		// reset spectators
-		if (arena.getPlayersManager().isSpectator(player.getName())) {
+		boolean spectator = arena.getPlayersManager().isSpectator(player.getName());
+		if (spectator) {
 			arena.getPlayersManager().removeSpecator(player.getName());
 			for (Player oplayer : Bukkit.getOnlinePlayers()) {
 				oplayer.showPlayer(player);
@@ -156,7 +159,7 @@ public class PlayerHandler {
 		// remove player from arena and restore his state
 		removePlayerFromArenaAndRestoreState(player, false);
 		// should not send messages and other things when player is a spectator
-		if (arena.getPlayersManager().isSpectator(player.getName())) {
+		if (spectator) {
 			return;
 		}
 		// send message to player
@@ -164,7 +167,7 @@ public class PlayerHandler {
 		// modify signs
 		plugin.signEditor.modifySigns(arena.getArenaName());
 		// send message to other players and update bars
-		for (Player oplayer : arena.getPlayersManager().getPlayers()) {
+		for (Player oplayer : arena.getPlayersManager().getAllParticipantsCopy()) {
 			msgtoarenaplayers = msgtoarenaplayers.replace("{PLAYER}", player.getName());
 			Messages.sendMessage(oplayer, msgtoarenaplayers);
 			if (!arena.getStatusManager().isArenaStarting() && !arena.getStatusManager().isArenaRunning()) {
