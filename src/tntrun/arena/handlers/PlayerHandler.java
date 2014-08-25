@@ -141,7 +141,7 @@ public class PlayerHandler {
 			Messages.sendMessage(oplayer, msgtoarenaplayers);
 		}
 		//add to spectators
-		arena.getPlayersManager().add(player);
+		arena.getPlayersManager().addSpectator(player);
 	}
 
 	// remove player from arena
