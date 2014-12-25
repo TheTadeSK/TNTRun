@@ -38,6 +38,22 @@ public class StructureManager {
 	}
 
 	private String world;
+	private Vector p1 = null;
+	private Vector p2 = null;
+	private GameZone gamezone = new GameZone();
+	private int gameleveldestroydelay = 8;
+	private LoseLevel loselevel = new LoseLevel();
+	private Vector spectatorspawn = null;
+	private Vector spawnpoint = null;
+	private int minPlayers = 2;
+	private int maxPlayers = 6;
+	private double votesPercent = 0.75;
+	private int timelimit = 180;
+	private int countdown = 10;
+	private Kits kits = new Kits();
+	private Rewards rewards = new Rewards();
+	private TeleportDestination teleportDest = TeleportDestination.PREVIOUS;
+	private DamageEnabled damageEnabled = DamageEnabled.NO;
 
 	public String getWorldName() {
 		return world;
@@ -47,37 +63,26 @@ public class StructureManager {
 		return Bukkit.getWorld(world);
 	}
 
-	private Vector p1 = null;
-
 	public Vector getP1() {
 		return p1;
 	}
 
-	private Vector p2 = null;
 
 	public Vector getP2() {
 		return p2;
 	}
 
-	private GameZone gamezone = new GameZone();
-
 	public GameZone getGameZone() {
 		return gamezone;
 	}
-
-	private int gameleveldestroydelay = 8;
 
 	public int getGameLevelDestroyDelay() {
 		return gameleveldestroydelay;
 	}
 
-	private LoseLevel loselevel = new LoseLevel();
-
 	public LoseLevel getLoseLevel() {
 		return loselevel;
 	}
-
-	private Vector spectatorspawn = null;
 
 	public Vector getSpectatorSpawnVector() {
 		return spectatorspawn;
@@ -90,8 +95,6 @@ public class StructureManager {
 		return null;
 	}
 
-	private Vector spawnpoint = null;
-
 	public Vector getSpawnPointVector() {
 		return spawnpoint;
 	}
@@ -100,50 +103,33 @@ public class StructureManager {
 		return new Location(getWorld(), spawnpoint.getX(), spawnpoint.getY(), spawnpoint.getZ());
 	}
 
-	private int maxPlayers = 6;
-
 	public int getMaxPlayers() {
 		return maxPlayers;
 	}
-
-	private int minPlayers = 2;
 
 	public int getMinPlayers() {
 		return minPlayers;
 	}
 
-	private double votesPercent = 0.75;
-
 	public double getVotePercent() {
 		return votesPercent;
 	}
-
-	private int timelimit = 180;
 
 	public int getTimeLimit() {
 		return timelimit;
 	}
 
-	private int countdown = 10;
-
 	public int getCountdown() {
 		return countdown;
 	}
-
-	private Kits kits = new Kits();
 
 	public Kits getKits() {
 		return kits;
 	}
 
-	private Rewards rewards = new Rewards();
-
 	public Rewards getRewards() {
 		return rewards;
 	}
-
-
-	private TeleportDestination teleportDest = TeleportDestination.PREVIOUS;
 
 	public TeleportDestination getTeleportDestination() {
 		return teleportDest;
@@ -152,8 +138,6 @@ public class StructureManager {
 	public static enum TeleportDestination {
 		PREVIOUS, LOBBY;
 	}
-
-	private DamageEnabled damageEnabled = DamageEnabled.NO;
 
 	public DamageEnabled getDamageEnabled() {
 		return damageEnabled;
