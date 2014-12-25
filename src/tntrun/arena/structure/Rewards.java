@@ -45,18 +45,22 @@ public class Rewards {
 	}
 
 	private List<ItemStack> itemrewards = new ArrayList<ItemStack>();
+	private List<String> commands = new ArrayList<String>();
+	private int moneyreward = 0;
 
-	public List<ItemStack> getItemRewads() {
-		return itemrewards;
+	public List<String> getCommandsToExecute() {
+		return commands;
 	}
 
-	private int moneyreward = 0;
+	public List<ItemStack> getItemsRewad() {
+		return itemrewards;
+	}
 
 	public int getMoneyReward() {
 		return moneyreward;
 	}
 
-	public void setRewards(ItemStack[] rewards) {
+	public void setItemsReward(ItemStack[] rewards) {
 		itemrewards.clear();
 		for (ItemStack reward : rewards) {
 			if (reward != null) {
@@ -65,8 +69,16 @@ public class Rewards {
 		}
 	}
 
-	public void setRewards(int money) {
+	public void setMoneyReward(int money) {
 		moneyreward = money;
+	}
+
+	public void addCommandToExecute(String command) {
+		commands.add(command);
+	}
+
+	public void clearCommandsToExceute() {
+		commands.clear();
 	}
 
 	public void rewardPlayer(Player player) {
@@ -89,6 +101,11 @@ public class Rewards {
 		rewardmessage = Messages.playerrewardmessage.replace("{REWARD}", rewardmessage);
 		if (!rewardmessage.isEmpty()) {
 			Messages.sendMessage(player, rewardmessage);
+		}
+		for (String command : commands) {
+			command = command.replace("{playerName}", player.getName());
+			command = command.replace("{playerUUID}", player.getUniqueId().toString());
+			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
 		}
 	}
 

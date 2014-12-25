@@ -24,8 +24,6 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 import tntrun.arena.Arena;
@@ -227,22 +225,6 @@ public class StructureManager {
 
 	public void setCountdown(int countdown) {
 		this.countdown = countdown;
-	}
-
-	public void addKit(String name, Player player) {
-		kits.registerKit(name, player);
-	}
-
-	public void removeKit(String name) {
-		kits.unregisterKit(name);
-	}
-
-	public void setRewards(ItemStack[] rewards) {
-		this.rewards.setRewards(rewards);
-	}
-
-	public void setRewards(int money) {
-		rewards.setRewards(money);
 	}
 
 	public void setTeleportDestination(TeleportDestination teleportDest) {

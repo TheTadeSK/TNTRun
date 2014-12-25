@@ -41,7 +41,7 @@ public class DeleteKit implements CommandHandlerInterface {
 			player.sendMessage("Disable arena first");
 			return true;
 		}
-		arena.getStructureManager().removeKit(args[1]);
+		arena.getStructureManager().getKits().unregisterKit(args[1]);
 		player.sendMessage("Kit deleted");
 		return true;
 	}

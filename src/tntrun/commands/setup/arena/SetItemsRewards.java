@@ -38,7 +38,7 @@ public class SetItemsRewards implements CommandHandlerInterface {
 				player.sendMessage("Disable arena first");
 				return true;
 			}
-			arena.getStructureManager().setRewards(player.getInventory().getContents());
+			arena.getStructureManager().getRewards().setItemsReward(player.getInventory().getContents());
 			player.sendMessage("Items Rewards set");
 		} else {
 			player.sendMessage("Arena does not exist");

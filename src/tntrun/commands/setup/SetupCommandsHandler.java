@@ -27,7 +27,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import tntrun.TNTRun;
+import tntrun.commands.setup.arena.AddCommandsRewards;
 import tntrun.commands.setup.arena.AddKit;
+import tntrun.commands.setup.arena.ClearCommandsRewards;
 import tntrun.commands.setup.arena.CreateArena;
 import tntrun.commands.setup.arena.DeleteArena;
 import tntrun.commands.setup.arena.DeleteKit;
@@ -87,6 +89,8 @@ public class SetupCommandsHandler implements CommandExecutor {
 		commandHandlers.put("setcountdown", new SetCountdown(plugin));
 		commandHandlers.put("setitemsrewards", new SetItemsRewards(plugin));
 		commandHandlers.put("setmoneyrewards", new SetMoneyRewards(plugin));
+		commandHandlers.put("addcommandrewards", new AddCommandsRewards(plugin));
+		commandHandlers.put("clearcommandrewards", new ClearCommandsRewards(plugin));
 		commandHandlers.put("addkit", new AddKit(plugin));
 		commandHandlers.put("deleteKit", new DeleteKit(plugin));
 		commandHandlers.put("settimelimit", new SetTimeLimit(plugin));

@@ -38,7 +38,7 @@ public class SetMoneyRewards implements CommandHandlerInterface {
 				player.sendMessage("Disable arena first");
 				return true;
 			}
-			arena.getStructureManager().setRewards(Integer.parseInt(args[1]));
+			arena.getStructureManager().getRewards().setMoneyReward(Integer.parseInt(args[1]));
 			player.sendMessage("Money Rewards set");
 		} else {
 			player.sendMessage("Arena does not exist");
