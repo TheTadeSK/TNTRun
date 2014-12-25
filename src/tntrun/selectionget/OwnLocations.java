@@ -25,13 +25,12 @@ import org.bukkit.entity.Player;
 public class OwnLocations {
 
 	private HashMap<String, Location> loc1 = new HashMap<String, Location>();
+	private HashMap<String, Location> loc2 = new HashMap<String, Location>();
 
 	protected void putPlayerLoc1(String playername, Location loc) {
 		loc = loc.getBlock().getLocation();
 		loc1.put(playername, loc);
 	}
-
-	private HashMap<String, Location> loc2 = new HashMap<String, Location>();
 
 	protected void putPlayerLoc2(String playername, Location loc) {
 		loc = loc.getBlock().getLocation();
@@ -53,31 +52,16 @@ public class OwnLocations {
 
 	// 0 is min, 1 is max
 	private Location[] sortLoc(Player player) {
-		Double xmin = loc1.get(player.getName()).getX();
-		Double xmax = loc2.get(player.getName()).getX();
-		if (xmin > xmax) {
-			Double temp = xmax;
-			xmax = xmin;
-			xmin = temp;
-		}
-		Double ymin = loc1.get(player.getName()).getY();
-		Double ymax = loc2.get(player.getName()).getY();
-		if (ymin > ymax) {
-			Double temp = ymax;
-			ymax = ymin;
-			ymin = temp;
-		}
-		Double zmin = loc1.get(player.getName()).getZ();
-		Double zmax = loc2.get(player.getName()).getZ();
-		if (zmin > zmax) {
-			Double temp = zmax;
-			zmax = zmin;
-			zmin = temp;
-		}
+		double x1 = loc1.get(player.getName()).getX();
+		double x2 = loc2.get(player.getName()).getX();
+		double y1 = loc1.get(player.getName()).getY();
+		double y2 = loc2.get(player.getName()).getY();
+		double z1 = loc1.get(player.getName()).getZ();
+		double z2 = loc2.get(player.getName()).getZ();
 
 		Location[] locs = new Location[2];
-		locs[0] = new Location(loc1.get(player.getName()).getWorld(), xmin, ymin, zmin);
-		locs[1] = new Location(loc1.get(player.getName()).getWorld(), xmax, ymax, zmax);
+		locs[0] = new Location(loc1.get(player.getName()).getWorld(), Math.min(x1, x2), Math.min(y1, y2), Math.min(z1, z2));
+		locs[1] = new Location(loc1.get(player.getName()).getWorld(), Math.max(x1, x2), Math.max(y1, y2), Math.max(z1, z2));
 		locs[0].distanceSquared(locs[1]);
 		return locs;
 	}
